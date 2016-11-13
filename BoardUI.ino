@@ -24,10 +24,9 @@ void BoardUIInit()
 
 void BoardUITick()
 {
-  OrbitOledMoveTo(0, 0);
+  /*OrbitOledMoveTo(0, 0);
   OrbitOledDrawString("Sign Language");
-  OrbitOledMoveTo(0, 15);
+  OrbitOledMoveTo(0, 12);
   OrbitOledDrawString("Interpretation");
-  OrbitOledUpdate();
+  OrbitOledUpdate();*/
 }
-
