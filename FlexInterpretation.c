@@ -1,3 +1,4 @@
+/* 
 #include "FlexInterpretation.h"
 
 // due to the fact that variably sized arrays cannot be variably modified, 
@@ -56,5 +57,6 @@ char translate(int f[]){
 
   return interpretation;
 }
+*/
 
 

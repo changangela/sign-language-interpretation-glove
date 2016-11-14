@@ -5,18 +5,17 @@
 #include <OrbitOledChar.h>
 #include <OrbitOledGrph.h>
 #include <stdlib.h>
-#include "FlexInterpretation.h"
 
 void WireInit();
 void BoardInit();
 void ShakeInit();
-void FlexInit();
+//void FlexInit();
 
-void FlexTick();
+//void FlexTick();
 void ShakeTick();
 void BoardUITick();
 
-extern const uint32_t Potentiometer;
+extern const uint32_t potentiometer;
 
 void setup() 
 {
@@ -29,16 +28,15 @@ void setup()
   BoardUIInit();
   FlexInit();
 
-  // Read some analog signal and scale it arbitrarily
+  // read some analog signal and scale it arbitrarily
   // for random seed.
   
-  // I'm not sure what this does
-  // srand((7+analogRead(Potentiometer)) * 347);
+  srand((7+analogRead(potentiometer)) * 347);
 }
 
 void loop() 
 {
   ShakeTick();
   BoardUITick();
-  FlexTick();
+  // FlexTick();
 }

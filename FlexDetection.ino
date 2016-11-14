@@ -2,11 +2,11 @@
 #include <Wire.h>
 #include <string.h>
 
-int flex1 = A1;
-int flex2 = A2;
-int flex3 = A3;
-int flex4 = A6;
-int flex5 = A5;
+const int flex1 = A1;
+const int flex2 = A2;
+const int flex3 = A4;
+const int flex4 = A5;
+const int flex5 = A6;
 
 int flex1min = 0;
 int flex2min = 0;
@@ -240,3 +240,4 @@ void FlexTick()
 
   delay(500); //just here to slow down the output for easier reading*/
 }
+
