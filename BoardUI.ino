@@ -62,10 +62,14 @@ void BoardUIInit()
  ********************************************************************/
  
 static void handlePageInterpretation(){
-  OrbitOledClear();
-  OrbitOledMoveTo(0, rowHeight * 0);
-  OrbitOledDrawString("Interpretation: ");
-  OrbitOledUpdate(); 
+  if(tickCounter == 1){
+    OrbitOledClear();
+    OrbitOledMoveTo(0, rowHeight * 0);
+    OrbitOledDrawString("Interpretation: ");
+    OrbitOledUpdate(); 
+  }
+  
+  flexRead();
 }
 
 /********************************************************************

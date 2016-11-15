@@ -8,21 +8,25 @@ void WireWriteByte(int address, uint8_t value);
 
 // flex resistor pins
 const uint32_t flexCount = 5;
+const uint32_t mapLow = 0;
+const uint32_t mapHigh = 10;
 
 // the A0 pin is shared with the potentiometer, turn potentiometer fully clockwise for best flex detection
 // these pins have been tested to work the best with the orbit booster pack attached
-const int flex[flexCount] = {A4, A2, A2, A2, A2};
+const int flex[flexCount] = {A1, A2, A3, A6, A11};
 
 // mapping values of minimum and maximum flex voltages
 int flexMin[flexCount] = {0};
 int flexMax[flexCount] = {0};
+int flexValue[flexCount]={0};
 
 void boosterPackUndoRead(){
   // default pin configurations of the orbit booster pack
   // the ones that are digitalRead are not listed
   
-  analogWrite(A2, LOW);
-  analogWrite(A4, HIGH);
+  for(int i = 0; i < flexCount; ++i){
+    analogWrite(flex[i], LOW);
+  }
 }
 
 void resetFlex(){
@@ -30,6 +34,27 @@ void resetFlex(){
     flexMax[i] = 0;
     flexMin[i] = 0;
   }
+}
+
+void flexRead(){
+  for(int i = 0; i < flexCount; ++i){
+    flexValue[i] = map(analogRead(flex[i]), flexMin[i], flexMax[i], mapLow, mapHigh);
+  }
+  boosterPackUndoRead();
+  
+  // serial monitor print for debugging
+  Serial.print(flexValue[0]);
+  Serial.print("||");
+  Serial.print(flexValue[1]);
+  Serial.print("||");
+  Serial.print(flexValue[2]);
+  Serial.print("||");
+  Serial.print(flexValue[3]);
+  Serial.print("||");
+  Serial.print(flexValue[4]);
+  Serial.println("||");
+  
+  delay(500);
 }
 int flexMaxCalibration(){
   
@@ -123,10 +148,10 @@ int flexMaxAverage(int numReadings){
   
   for(int i = 0; i < flexCount; ++i){
     flexMax[i] /= numReadings;
-    if(!(flexMax[i] > flexMin[i])){
-      // the flexMax value must be greater than FlexMin value
-      return 0;
-    }
+//    if(!(flexMax[i] > flexMin[i])){
+//      // the flexMax value must be greater than FlexMin value
+//      return 0;
+//    }
   }
   
   // serial print for debugging purpurses
@@ -148,11 +173,39 @@ int flexMaxAverage(int numReadings){
 void FlexInit()
 {
   Serial.begin(9600);
+  // SerialDebugInit();
 }
 
 
 void FlexTick()
 {
-  
+  // flexRead();
 }
 
+void SerialDebugInit(){
+  int countdown = 3;
+  int numReadings = 100;
+  
+  Serial.println("Minimum calibration in: ");
+  for(int i = countdown; i > 0; --i){
+    Serial.println( i );
+    delay(1000);
+  }  
+  
+  for(int i = 0; i < numReadings; ++i){
+    flexMinCalibration();
+  }
+  flexMinAverage(numReadings);
+  
+  Serial.println("Maximum calibration in: ");
+  for(int i = countdown; i > 0; --i){
+    Serial.println( i );
+    delay(1000);
+  }
+
+  for(int i = 0; i < numReadings; ++i){
+    flexMaxCalibration();
+  }
+  flexMaxAverage(numReadings);
+    
+}
