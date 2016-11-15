@@ -10,11 +10,11 @@ static enum BoardPages
 } boardUIPage = welcome;
 
 const uint32_t switchCount = 2;
-const uint32_t buttonCount = 2;
+const uint32_t buttonCount = 1;
 
 
 const uint32_t switches[switchCount] = { PA_7, PA_6 };
-const uint32_t buttons[buttonCount] = { PD_2, PE_0 };
+const uint32_t buttons[buttonCount] = { PD_2};
 // const uint32_t potentiometer = PE_3;
 
 int rowHeight = 12;
@@ -32,9 +32,8 @@ struct BoardState
 
 static struct InputState
 {
-  bool                switches[2];
-  struct ButtonState  buttons[2];
-  int                 flex[2];
+  bool                switches[switchCount];
+  struct ButtonState  buttons[buttonCount];
   float               potentiometer;
 } boardInputState;
 
@@ -67,9 +66,18 @@ static void handlePageInterpretation(){
     OrbitOledMoveTo(0, rowHeight * 0);
     OrbitOledDrawString("Interpretation: ");
     OrbitOledUpdate(); 
+    OrbitOledMoveTo(0, rowHeight * 1);
   }
   
   flexRead();
+  
+  // click button to add letter to screen
+  for(int i = 0; i < buttonCount; ++i){
+    if(boardInputState.buttons[i].isRising){
+      OrbitOledDrawChar(flexRead());
+      OrbitOledUpdate();
+    }
+  }
 }
 
 /********************************************************************

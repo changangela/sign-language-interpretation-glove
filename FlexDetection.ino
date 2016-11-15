@@ -36,11 +36,13 @@ void resetFlex(){
   }
 }
 
-void flexRead(){
+char flexRead(){
   for(int i = 0; i < flexCount; ++i){
     flexValue[i] = map(analogRead(flex[i]), flexMin[i], flexMax[i], mapLow, mapHigh);
   }
   boosterPackUndoRead();
+  
+  char interpretedLetter = translate(flexValue);
   
   // serial monitor print for debugging
   Serial.print(flexValue[0]);
@@ -52,8 +54,11 @@ void flexRead(){
   Serial.print(flexValue[3]);
   Serial.print("||");
   Serial.print(flexValue[4]);
+  Serial.print("||");
+  Serial.print(interpretedLetter);
   Serial.println("||");
   
+  return interpretedLetter;
   delay(500);
 }
 int flexMaxCalibration(){
