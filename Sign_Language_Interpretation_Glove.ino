@@ -15,7 +15,7 @@ void ShakeInit();
 void ShakeTick();
 void BoardUITick();
 
-extern const uint32_t potentiometer;
+// extern const uint32_t potentiometer;
 
 void setup() 
 {
@@ -31,7 +31,7 @@ void setup()
   // read some analog signal and scale it arbitrarily
   // for random seed.
   
-  srand((7+analogRead(potentiometer)) * 347);
+  // srand((7+analogRead(potentiometer)) * 347);
 }
 
 void loop() 
