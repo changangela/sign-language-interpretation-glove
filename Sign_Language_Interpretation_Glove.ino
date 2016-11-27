@@ -9,6 +9,8 @@
 void WireInit();
 void BoardInit();
 void ShakeInit();
+void SerialInit();
+
 //void FlexInit();
 
 //void FlexTick();
@@ -19,13 +21,13 @@ void BoardUITick();
 
 void setup() 
 {
-  WireInit();
-  Serial.begin(9600);
+  // WireInit();
 
   delay(100);
+  Serial.begin(9600);
 
-  ShakeInit();
-  BoardUIInit();
+  // ShakeInit();
+  SerialInit();
   FlexInit();
 
   // read some analog signal and scale it arbitrarily
@@ -36,7 +38,8 @@ void setup()
 
 void loop() 
 {
-  ShakeTick();
-  BoardUITick();
+  // ShakeTick();
+  // BoardUITick();
+  SerialTick();
   // FlexTick();
 }

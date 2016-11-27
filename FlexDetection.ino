@@ -13,7 +13,7 @@ const uint32_t mapHigh = 10;
 
 // the A0 pin is shared with the potentiometer, turn potentiometer fully clockwise for best flex detection
 // these pins have been tested to work the best with the orbit booster pack attached
-const int flex[flexCount] = {A1, A2, A3, A6, A11};
+const int flex[flexCount] = {A2,A2,A2,A2,A2};
 
 // mapping values of minimum and maximum flex voltages
 int flexMin[flexCount] = {0};
