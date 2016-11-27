@@ -28,6 +28,7 @@ void setup()
 
   // ShakeInit();
   SerialInit();
+  // CalibrationInit();
   FlexInit();
 
   // read some analog signal and scale it arbitrarily
@@ -42,4 +43,5 @@ void loop()
   // BoardUITick();
   SerialTick();
   // FlexTick();
+  // CalibrationTick();
 }
