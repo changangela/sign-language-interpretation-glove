@@ -10,7 +10,7 @@ void WireWriteByte(int address, uint8_t value);
 // flex resistor pins
 const uint32_t flexCount = 5;
 const uint32_t mapLow = 0;
-const uint32_t mapHigh = 10;
+const uint32_t mapHigh = 100;
 
 // the A0 pin is shared with the potentiometer, turn potentiometer fully clockwise for best flex detection
 // these pins have been tested to work the best with the orbit booster pack attached
@@ -26,6 +26,12 @@ void resetFlex(){
   for(int i = 0; i < flexCount; ++i){
     flexMax[i] = 0;
     flexMin[i] = 0;
+  }
+}
+
+void resetLetter(int letter){
+  for(int i = 0; i < 26; ++i){
+    flexLetter[letter][i] = 0;
   }
 }
 

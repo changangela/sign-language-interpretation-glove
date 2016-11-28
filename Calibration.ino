@@ -11,9 +11,9 @@
 //} boardUIPage = welcome;
 //
 //const uint32_t switchCount = 2;
-//const uint32_t buttonCount = 1;
+//const uint32_t buttonCount = 2;
 //
-//const uint32_t buttons[buttonCount] = {PF_4};
+//const uint32_t buttons[buttonCount] = {PF_4, PF_0};
 //// const uint32_t potentiometer = PE_3;
 //
 //int rowHeight = 12;
@@ -110,17 +110,29 @@
 //    if(flexLetterAverage(currentLetter,numReadings)){
 //      Serial.println("Successful! Press button to continue...");
 //      int tempLetter = currentLetter;
-//      while(tempLetter == currentLetter){
+//      int doReset = 0;
+//      while(tempLetter == currentLetter && !doReset){
 //        for(int i = 0; i < buttonCount; ++i){
 //           if(!digitalRead(buttons[i])){
 //             while(!digitalRead(buttons[i])){
 //             }
 //             
-//             if(currentLetter > 25){
-//               boardUIPage = interpretation;
+//             if(buttons[i] == PF_0){
+//               // if letter calibration screwed up, button allows backwards propagation
+//               resetLetter(currentLetter);
+//               tickCounter = 0;
+//               doReset = 1;
+//               Serial.println("Resetting letter...");
 //             }
-//             currentLetter++;
-//             tickCounter = 0;
+//             else
+//             {
+//               // if calibration successful, moves on to next letter
+//               if(currentLetter > 25){
+//                 boardUIPage = interpretation;
+//               }
+//               currentLetter++;
+//               tickCounter = 0;
+//             }
 //           }
 //        }
 //      }
