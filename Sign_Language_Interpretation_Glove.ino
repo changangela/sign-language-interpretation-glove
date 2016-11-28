@@ -10,6 +10,7 @@ void WireInit();
 void BoardInit();
 void ShakeInit();
 void SerialInit();
+void GyroAccelInit();
 
 //void FlexInit();
 
@@ -21,7 +22,6 @@ void BoardUITick();
 
 void setup() 
 {
-  // WireInit();
 
   delay(100);
   Serial.begin(9600);
@@ -30,6 +30,7 @@ void setup()
   SerialInit();
   // CalibrationInit();
   FlexInit();
+  GyroAccelInit();
 
   // read some analog signal and scale it arbitrarily
   // for random seed.

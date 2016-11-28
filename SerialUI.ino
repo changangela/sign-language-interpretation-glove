@@ -93,14 +93,16 @@ static void handlePageMaxCalibration()
   // the flex sensor is read numerous times and the average value is taken
   if(tickCounter < numReadings){
     // error message if no data is read
+    accelGyroMaxCalibration();
     if(!flexMaxCalibration()){
       Serial.println("Invalid reading...");
       resetFlex();
+      resetGyroAccel();
       delay(1000);
     }    
   }else if(tickCounter == numReadings){
     // takes the average value of all readings
-    
+    accelGyroMaxAverage(numReadings);
     if(flexMaxAverage(numReadings)){
       Serial.println("Successful! Press button to continue...");
       while(boardUIPage == maxCalibration){
@@ -157,14 +159,17 @@ static void handlePageMinCalibration()
   // the flex sensor is read numerous times and the average value is taken
   if(tickCounter < numReadings){
     // reads data and error message if no data is read
+    accelGyroMinCalibration();
     if(!flexMinCalibration()){
       resetFlex();
+      resetGyroAccel();
       Serial.println("Invalid reading...");
       tickCounter = 0;
       delay(1000);
     }    
   }else if(tickCounter == numReadings){
     // takes the average value of all readings
+    accelGyroMinAverage(numReadings);
     if(flexMinAverage(numReadings)){
       Serial.println("Successful! Press button to continue...");
       while(boardUIPage == minCalibration){
@@ -202,6 +207,9 @@ static void handlePageMinCalibration()
 
 static void handlePageWelcome(){
   // displays "Sign language interpretation glove" while checking for button press
+
+  while(!Serial){
+  }
   
   Serial.println("Welcome to Sign Language Interpretation Glove");
   Serial.println("Press button to continue...");
