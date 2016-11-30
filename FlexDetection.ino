@@ -10,7 +10,7 @@ void WireWriteByte(int address, uint8_t value);
 // flex resistor pins
 const uint32_t flexCount = 5;
 const uint32_t mapLow = 0;
-const uint32_t mapHigh = 100;
+extern const uint32_t mapHigh = 100;
 
 // the A0 pin is shared with the potentiometer, turn potentiometer fully clockwise for best flex detection
 // these pins have been tested to work the best with the orbit booster pack attached
@@ -43,31 +43,31 @@ void resetLetter(int letter){
 //  }
 //}
 
-char flexRead(){
+int* flexRead(){
+  // function returns a list of 5 flex values
+  
   for(int i = 0; i < flexCount; ++i){
     flexValue[i] = map(analogRead(flex[i]), flexMin[i], flexMax[i], mapLow, mapHigh);
   }
-//  boosterPackUndoRead();
-  
-  char interpretedLetter = translate(flexValue);
+
+  //  boosterPackUndoRead();
   
   // serial monitor print for debugging
   Serial.print(flexValue[0]);
-  Serial.print("||");
+  Serial.print(" || ");
   Serial.print(flexValue[1]);
-  Serial.print("||");
+  Serial.print(" || ");
   Serial.print(flexValue[2]);
-  Serial.print("||");
+  Serial.print(" || ");
   Serial.print(flexValue[3]);
-  Serial.print("||");
+  Serial.print(" || ");
   Serial.print(flexValue[4]);
-  Serial.print("||");
-  Serial.print(interpretedLetter);
-  Serial.println("||");
+  Serial.print(" || ");
+
+  return flexValue;
   
-  return interpretedLetter;
-  delay(500);
 }
+
 int flexLetterCalibration(int letter){
   
   // calibrates the value of all 5 flex resistors when hand is at said value

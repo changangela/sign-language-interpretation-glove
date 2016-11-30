@@ -23,9 +23,11 @@ const int x = 0;
 const int y = 1;
 const int z = 2;
 
+
+
 int16_t accel[3] = {0};
-int16_t accelMin[3] = {0};
-int16_t accelMax[3] = {0};
+int accelMin[3] = {0};
+int accelMax[3] = {0};
 
 int16_t gyro[3] = {0};
 int16_t gyroMin[3] = {0};
@@ -56,15 +58,6 @@ void GyroAccelInit() {
   
   accelgyro.initialize();
 
-  //Used to calibrate the gyro and accel, by using an offset
-  accelgyro.setXAccelOffset(-2196);
-  accelgyro.setYAccelOffset(3286);
-  accelgyro.setZAccelOffset(1460);
-  accelgyro.setXGyroOffset(66);
-  accelgyro.setYGyroOffset(-13);
-  accelgyro.setZGyroOffset(-6);
-  //
- 
   pinMode(LED_PIN, OUTPUT);
 }
 
@@ -74,7 +67,7 @@ void accelGyroMinCalibration() {
   //accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
   int16_t tempAccelMin[3];
-  accelgyro.getRotation(&tempAccelMin[x], &tempAccelMin[y], &tempAccelMin[z]); // Gives you rotation ???
+  accelgyro.getAcceleration(&tempAccelMin[x], &tempAccelMin[y], &tempAccelMin[z]); // Gives you rotation ???
   //accelgyro.getRotation(&gx, &gy, &gz); //Gives you acceleration ??!
 
   for(int i = 0; i < 3; ++i){
@@ -108,7 +101,7 @@ void accelGyroMaxCalibration() {
   //accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
   int16_t tempAccelMax[3];
-  accelgyro.getRotation(&tempAccelMax[x], &tempAccelMax[y], &tempAccelMax[z]); // Gives you rotation ???
+  accelgyro.getAcceleration(&tempAccelMax[x], &tempAccelMax[y], &tempAccelMax[z]); // Gives you rotation ???
   //accelgyro.getRotation(&gx, &gy, &gz); //Gives you acceleration ??!
 
   for(int i = 0; i < 3; ++i){
@@ -120,7 +113,7 @@ void accelGyroMaxCalibration() {
 #ifdef OUTPUT_READABLE_ACCELGYRO
     // display tab-separated accel/gyro x/y/z values
     
-    Serial.print("Accelerometer");
+    Serial.print("Accelerometer: ");
     Serial.print(accelMax[x]); Serial.print(" || ");
     Serial.print(accelMax[y]); Serial.print(" || ");
     Serial.println(accelMax[z]);
@@ -155,10 +148,22 @@ void accelGyroMaxAverage(int numReadings){
     accelMax[i] /= numReadings;
   }
 
-  Serial.print("Accelerometer max average");
+  Serial.print("Accelerometer max average: ");
   Serial.print(accelMax[x]); Serial.print(" || ");
   Serial.print(accelMax[y]); Serial.print(" || ");
   Serial.println(accelMax[z]);
     
+}
+
+int16_t* accelGyroRead(){
+
+  accelgyro.getAcceleration(&accel[x], &accel[y], &accel[z]); // Gives you rotation ???
+  Serial.print(map(accel[x], accelMin[x], accelMax[x], 0, 100)); Serial.print(" || ");
+  Serial.print(map(accel[y], accelMin[y], accelMax[y], 0, 100)); Serial.print(" || ");
+  Serial.print(map(accel[z], accelMin[z], accelMax[z], 0, 100)); Serial.print(" || ");
+  //accelgyro.getRotation(&gx, &gy, &gz); //Gives you acceleration ??!
+
+  return accel;
+
 }
 

@@ -57,14 +57,13 @@ static void handlePageInterpretation(){
     Serial.println("Interpretation: ");
   }
   
-  flexRead();
+
+  char interpretedLetter = translate(flexRead(), accelGyroRead());
   
-  // click button to add letter to screen
-  for(int i = 0; i < buttonCount; ++i){
-    if(boardInputState.buttons[i].isRising){
-        Serial.println(flexRead());
-    }
-  }
+  Serial.println(interpretedLetter);
+
+  // FOLLOWING DELAY ONLY FOR DEBUGGING PURPOSES
+  delay(100);
 }
 
 /********************************************************************
