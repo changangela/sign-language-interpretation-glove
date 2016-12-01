@@ -66,6 +66,10 @@ int* flexRead(){
 
   return flexValue;
   
+<<<<<<< Updated upstream:FlexDetection.ino
+=======
+  return interpretedLetter;
+>>>>>>> Stashed changes:BoardUI/FlexDetection.ino
 }
 
 int flexLetterCalibration(int letter){
