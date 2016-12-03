@@ -14,3 +14,9 @@ Using the Tiva LaunchPad board along with the orbit booster back to create a glo
 - The TivaTMC Series LaunchPad board will then be attached to the glove
 - Five 22,000ohm resistors will be used as voltage dividers
 - The on-board accelerometer from the Orbit boosterpack will be used to detect gestures
+
+## Hardware schematics
+The full hardware schematics of this project can be found <a href = "Hardware_Schematics.pdf">here.</a>
+
+![Demo](Demo.jpg)
+
