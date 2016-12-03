@@ -18,5 +18,5 @@ Using the Tiva LaunchPad board along with the orbit booster back to create a glo
 ## Hardware schematics
 The full hardware schematics of this project can be found <a href = "Hardware_Schematics.pdf">here.</a>
 
-![Demo](Demo.jpg)
+![Demo](Glove_Demo.jpg)
 
