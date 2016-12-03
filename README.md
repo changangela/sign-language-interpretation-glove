@@ -16,4 +16,6 @@ Using the Tiva LaunchPad board along with the orbit booster back to create a glo
 - The on-board accelerometer from the Orbit boosterpack will be used to detect gestures
 
 ## Hardware schematics
-The full hardware schematics of this project can be found ![here](Hardware_Schematics)
+The full hardware schematics of this project can be found <a href = "Hardware_Schematic">here</a>
+
+
