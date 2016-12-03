@@ -1,4 +1,3 @@
-
 # Sign language interpretation glove
 Using the Tiva LaunchPad board along with the orbit booster back to create a glove for basic sign language (letter) interpretation through the use of multiple flexible resistors and the on-board accelerometer.
 
